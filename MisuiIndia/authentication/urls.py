@@ -1,6 +1,8 @@
 from django.urls import path, include
 from rest_framework_simplejwt import views as jwt_views
 from .views import ObtainTokenPair, RegisterView,  SellerRegister,home
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('token/obtain/', ObtainTokenPair.as_view(), name='token_create'),
@@ -12,3 +14,6 @@ urlpatterns = [
     path('SellerRegister/', SellerRegister.as_view(), name='SellerRegister'),
     path('product/',include('products_api.urls'))
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

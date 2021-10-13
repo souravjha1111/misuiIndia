@@ -8,6 +8,9 @@ from django.http import QueryDict
 from .models import ProductModel
 from rest_framework.response import Response
 from rest_framework import viewsets
+
+
+
 class addnewproductdetails(APIView):
     permission_classes = (permissions.AllowAny,)
     def post(self, request):
@@ -41,6 +44,17 @@ class detailofproduct(APIView):
     def get(self, request, pk):
         product = ProductModel.objects.get(pk = pk)
         serializer = ProductSerializer(product)
+        return Response(serializer.data)
+
+
+
+class getsellerproducts(APIView):
+    permission_classes = (permissions.AllowAny,)
+    def get(self, request, pk):
+        product = ProductModel.objects.all()
+        product = product.filter(seller = pk)
+        serializer = ProductSerializer(product, many =True)
+
         return Response(serializer.data)
 
 
