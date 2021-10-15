@@ -72,26 +72,25 @@ WSGI_APPLICATION = 'MisuiIndia.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-        'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
-
-
 # DATABASES = {
 #         'default': {
-#             'ENGINE': 'djongo',
-#             'NAME': 'codefree',
-#             'ENFORCE_SCHEMA': False,
-#             'CLIENT': {
-#                 'host': 'mongodb+srv://sourav:sourav@cluster0.cdasj.mongodb.net/codefree?retryWrites=true&w=majority'
-#             }  
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #         }
-# }
+#     }
 
 
+DATABASES = {
+        'default': {
+            'ENGINE': 'djongo',
+            'NAME': 'codefree',
+            'ENFORCE_SCHEMA': False,
+            'CLIENT': {
+                'host': 'mongodb+srv://sourav:sourav@cluster0.cdasj.mongodb.net/codefree?retryWrites=true&w=majority'
+            }  
+        }
+}
+# mongodb+srv://sourav:<password>@cluster0.cdasj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 # DATABASES = {
 #         'default': {
 #             'ENGINE': 'djongo',
@@ -231,3 +230,6 @@ STATICFILES_DIRS = [
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True

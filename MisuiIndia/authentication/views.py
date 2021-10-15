@@ -4,22 +4,16 @@ from .serializers import MyTokenObtainPairSerializer, UserSerializer, SellerSeri
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from .forms import SellerRegisterForm, sellerloginform
 from rest_framework.response import Response
 from django.shortcuts import redirect
-from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 import jwt, datetime
 from django.views import View
 from .models import CustomUser
-from django.http import JsonResponse
 from rest_framework_simplejwt.tokens import RefreshToken
-from django.middleware import csrf
 from django.contrib.auth import authenticate
 from django.conf import settings
-from rest_framework import status
-from rest_framework.response import Response
 
 
 
