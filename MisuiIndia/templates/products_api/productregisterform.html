@@ -1,0 +1,13 @@
+{% load crispy_forms_tags %}
+<div class="content-section">
+    <form method="POST" enctype='multipart/form-data'>
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Enter Product details </legend>
+            {{ form|crispy }}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">submit</button>
+        </div>
+    </form>
+</div>

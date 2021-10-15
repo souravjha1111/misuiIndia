@@ -3,7 +3,7 @@ from django.db.models.fields import CharField
 from authentication.models import CustomUser
 
 class ProductModel(models.Model):
-    image = models.ImageField(default='default.jpg', upload_to='images')
+    image = models.ImageField(null=True, blank=True, upload_to = '')
     productName = models.CharField(max_length=200)
     seller = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     # image = models.URLField(max_length = 200)   

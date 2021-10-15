@@ -8,7 +8,7 @@ from django.http import QueryDict
 from .models import ProductModel
 from rest_framework.response import Response
 from rest_framework import viewsets
-
+from .forms import productregistrationform
 
 
 class addnewproductdetails(APIView):
@@ -24,7 +24,7 @@ class addnewproductdetails(APIView):
         product_data = ProductSerializer(data=data)
         product_data.is_valid(raise_exception=True)
         product_data.save()
-        return redirect(home) 
+        return render(request, 'products_api/home.html')
     
     def get(self, request):
         return render(request, 'products_api/addnewproductdetails.html')
@@ -62,6 +62,74 @@ class getsellerproducts(APIView):
 def home(request):
     return render(request, 'products_api/home.html')
 
+
+def registersellerproductsform(request):
+    if request.method == 'POST':
+        form = productregistrationform(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'products_api/home.html')
+
+    else:
+        form = productregistrationform()
+    return render(request, 'products_api/productregisterform.html', {'form': form})
+
+
+
+
+# # Create your views here.
+# def registersellerproductsform(request):
+# 	context = {}
+# 	if request.method == "POST":
+# 		form = productregistrationform(request.POST, request.FILES)
+# 		if form.is_valid():
+# 			image = form.cleaned_data.get("image")
+# 			productName = form.cleaned_data.get("productName")
+# 			seller = form.cleaned_data.get("seller")
+# 			brand = form.cleaned_data.get("brand")
+# 			category = form.cleaned_data.get("category")
+# 			price = form.cleaned_data.get("price")
+# 			countInStock = form.cleaned_data.get("countInStock")
+# 			rating = form.cleaned_data.get("rating")
+# 			numReviews = form.cleaned_data.get("numReviews")
+# 			weight = form.cleaned_data.get("weight")
+# 			volume = form.cleaned_data.get("volume")
+# 			size = form.cleaned_data.get("size")
+# 			color = form.cleaned_data.get("color")
+# 			description = form.cleaned_data.get("description")
+# 			obj = GeeksModel.objects.create(image = image,	productName = productName,seller = seller,brand = brand,category = category,price = price, rating = rating, countInStock = countInStock, numReviews = numReviews,
+# 								weight = weight, volume = volume, size = size, color = color, description = description)
+# 			obj.save()
+            
+# Create your views here.
+def registersellerproductsform(request):
+    if request.method == "POST":
+        form = productregistrationform(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponse("done")
+    else:
+        form = productregistrationform()
+    return render(request, 'products_api/productregisterform.html', {'form': form})
+
+
+
+            # image = form.cleaned_data.get("image")
+            # productName = form.cleaned_data.get("productName")
+			# seller = form.cleaned_data.get("seller")
+            # brand = form.cleaned_data.get("brand")
+			# category = form.cleaned_data.get("category")
+			# price = form.cleaned_data.get("price")
+			# countInStock = form.cleaned_data.get("countInStock")
+			# rating = form.cleaned_data.get("rating")
+			# numReviews = form.cleaned_data.get("numReviews")
+			# weight = form.cleaned_data.get("weight")
+			# volume = form.cleaned_data.get("volume")
+			# size = form.cleaned_data.get("size")
+			# color = form.cleaned_data.get("color")
+			# description = form.cleaned_data.get("description")
+            # obj = GeeksModel.objects.create(image = image,	productName = productName,seller = seller,brand = brand,category = category,price = price, rating = rating, countInStock = countInStock, numReviews = numReviews,
+			# 					weight = weight, volume = volume, size = size, color = color, description = description)
 
 ###############################################################################################################################################
 # def addnewproductdetails(request):
