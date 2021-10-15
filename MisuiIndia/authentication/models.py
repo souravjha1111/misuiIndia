@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractUser
 
 class CustomUser(AbstractUser):
     contact_number = models.IntegerField(null=True, blank = True) #Edit this null part
-    isSeller = models.CharField(default = "False" ,max_length = 5)
+    isSeller = models.BooleanField(default = False )
     adharCardNumber = models.BigIntegerField(unique = True, null = True, blank = True)
     PanNumber = models.CharField(unique  = True,  null = True, blank = True, max_length = 10)
     REQUIRED_FIELDS = ['password','contact_number']

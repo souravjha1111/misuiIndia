@@ -9,8 +9,9 @@ from .models import ProductModel
 from rest_framework.response import Response
 from rest_framework import viewsets
 from .forms import productregistrationform
-
-
+import time
+import jwt
+from  authentication.models import CustomUser
 class addnewproductdetails(APIView):
     permission_classes = (permissions.AllowAny,)
     def post(self, request):
@@ -65,14 +66,64 @@ def home(request):
 
 def registersellerproductsform(request):
     if request.method == 'POST':
+        response = redirect('Sellerlogin')
+        print("#########################################################################")
+        cookies = request.COOKIES
+        decoded = []
+        if 'refresh' in cookies:
+            decoded = jwt.decode(cookies['refresh'], options={"verify_signature": False}) 
+            if int(decoded['exp'] ) <int(time.time()):
+                print("true")
+                return response
+        if 'refresh' not in cookies:
+            return response
+        response = redirect('Sellerlogin')
         form = productregistrationform(request.POST)
         if form.is_valid():
+            instance = form.save(commit = False)
+            instance.seller = CustomUser.objects.get(id = decoded["user_id"])
             form.save()
             return render(request, 'products_api/home.html')
-
     else:
         form = productregistrationform()
     return render(request, 'products_api/productregisterform.html', {'form': form})
+
+
+
+
+
+
+###############################################################################################################################################
+# def addnewproductdetails(request):
+#     if request.method == 'POST':
+#         product_data = ProductSerializer(data =data)
+#         if form.is_valid():
+#             form.save()
+#             return redirect("home")   
+#     else:
+#         form = ProductSerializer()
+#     return render(request, 'products_api/addnewproductdetails.html', {'form': form})
+
+
+
+# class ProductRegister(APIView):
+#     permission_classes = (permissions.AllowAny,)
+#     def post(self, request):
+#         form = ProductSerializer(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return HttpResponse("Your Product is registered")  
+
+#     def get(self, request):
+#         form = ProductSerializer()
+#         return render(request, 'products_api/registerproduct.html', {'form': form})        
+
+
+
+
+
+
+
 
 
 
@@ -102,56 +153,3 @@ def registersellerproductsform(request):
 # 			obj.save()
             
 # Create your views here.
-def registersellerproductsform(request):
-    if request.method == "POST":
-        form = productregistrationform(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return HttpResponse("done")
-    else:
-        form = productregistrationform()
-    return render(request, 'products_api/productregisterform.html', {'form': form})
-
-
-
-            # image = form.cleaned_data.get("image")
-            # productName = form.cleaned_data.get("productName")
-			# seller = form.cleaned_data.get("seller")
-            # brand = form.cleaned_data.get("brand")
-			# category = form.cleaned_data.get("category")
-			# price = form.cleaned_data.get("price")
-			# countInStock = form.cleaned_data.get("countInStock")
-			# rating = form.cleaned_data.get("rating")
-			# numReviews = form.cleaned_data.get("numReviews")
-			# weight = form.cleaned_data.get("weight")
-			# volume = form.cleaned_data.get("volume")
-			# size = form.cleaned_data.get("size")
-			# color = form.cleaned_data.get("color")
-			# description = form.cleaned_data.get("description")
-            # obj = GeeksModel.objects.create(image = image,	productName = productName,seller = seller,brand = brand,category = category,price = price, rating = rating, countInStock = countInStock, numReviews = numReviews,
-			# 					weight = weight, volume = volume, size = size, color = color, description = description)
-
-###############################################################################################################################################
-# def addnewproductdetails(request):
-#     if request.method == 'POST':
-#         product_data = ProductSerializer(data =data)
-#         if form.is_valid():
-#             form.save()
-#             return redirect("home")   
-#     else:
-#         form = ProductSerializer()
-#     return render(request, 'products_api/addnewproductdetails.html', {'form': form})
-
-
-
-# class ProductRegister(APIView):
-#     permission_classes = (permissions.AllowAny,)
-#     def post(self, request):
-#         form = ProductSerializer(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return HttpResponse("Your Product is registered")  
-
-#     def get(self, request):
-#         form = ProductSerializer()
-#         return render(request, 'products_api/registerproduct.html', {'form': form})        
