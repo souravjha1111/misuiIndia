@@ -65,7 +65,6 @@ python-jwt==2.0.1
 PyTweening==1.0.3
 pytz==2021.1
 pywhatkit==4.9
-requests==2.11.1
 requests-toolbelt==0.7.0
 screen-recorder==0.9.3
 six==1.16.0
@@ -75,3 +74,6 @@ termcolor==1.1.0
 typing-extensions==3.10.0.0
 urllib3==1.26.4
 Werkzeug==0.16.1
+django-heroku==0.3.1
+gunicorn==20.0.4
+python-socketio==4.6.1
