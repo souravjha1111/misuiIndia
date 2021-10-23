@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.fields import CharField
 from authentication.models import CustomUser
+import time
 
 class ProductModel(models.Model):
     category_choice = (('electronics', 'electronics'),    ('vegetable', 'vegetable'),        ('cloth', 'cloth'),  ('fruits', 'fruits'),('furniture', 'Female'),  ('book', 'book'),        ('others', 'others'))
@@ -22,4 +23,3 @@ class ProductModel(models.Model):
 
     def __str__(self):
         return self.productName + ' by ' + str(self.seller)
-

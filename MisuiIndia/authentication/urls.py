@@ -14,8 +14,8 @@ urlpatterns = [
     path('SellerRegister/', SellerRegister.as_view(), name='SellerRegister'),
     path('SellerRegisterform/', SellerRegisterform, name='SellerRegisterform'),
     path('Sellerlogin/', Sellerlogin.as_view(), name='Sellerlogin'),
-    path('product/',include('products_api.urls')),
-    path('sellerlogout/', sellerlogout, name = 'sellerlogout')
+    path('sellerlogout/', sellerlogout, name = 'sellerlogout'),
+    path('order/',include('orders.urls')),
 
     
 ]

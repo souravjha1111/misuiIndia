@@ -5,4 +5,4 @@ from .models import ProductModel
 class ProductModelAdmin(admin.ModelAdmin):
     model = ProductModel
 
-admin.site.register(ProductModel, ProductModelAdmin)
+admin.site.register(ProductModel, ProductModelAdmin),
