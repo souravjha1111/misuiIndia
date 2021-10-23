@@ -16,6 +16,7 @@ urlpatterns = [
     path('Sellerlogin/', Sellerlogin.as_view(), name='Sellerlogin'),
     path('sellerlogout/', sellerlogout, name = 'sellerlogout'),
     path('order/',include('orders.urls')),
+    path('product/',include('products_api.urls')),
 
     
 ]
