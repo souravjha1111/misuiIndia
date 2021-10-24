@@ -9,7 +9,7 @@ from django.shortcuts import redirect
 from rest_framework.views import APIView
 import jwt, datetime
 from django.views import View
-from .models import OrderModel
+from .models import OrderModel, SellerProductModel
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
 from django.conf import settings

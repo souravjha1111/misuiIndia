@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import CustomUser
 
 
-class SellerRegisterForm(UserCreationForm):
+class storeRegisterForm(UserCreationForm):
     # email = forms.EmailField()
 
     class Meta:
@@ -13,6 +13,6 @@ class SellerRegisterForm(UserCreationForm):
 
 
 
-class sellerloginform(forms.Form):
+class storeloginform(forms.Form):
     username = forms.CharField(label='username', max_length=100)
     password = forms.CharField(widget = forms.PasswordInput())

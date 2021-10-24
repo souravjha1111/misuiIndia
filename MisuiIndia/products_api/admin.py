@@ -1,8 +1,12 @@
 from django.contrib import admin
-from .models import ProductModel
+from .models import ProductModel, SellerProductModel
 # Register your models here.
 
 class ProductModelAdmin(admin.ModelAdmin):
     model = ProductModel
 
-admin.site.register(ProductModel, ProductModelAdmin),
+class SellerProductModelAdmin(admin.ModelAdmin):
+    model = SellerProductModel
+
+admin.site.register(ProductModel, ProductModelAdmin)
+admin.site.register(SellerProductModel, SellerProductModelAdmin)

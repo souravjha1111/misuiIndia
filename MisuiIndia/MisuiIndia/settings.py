@@ -82,15 +82,38 @@ WSGI_APPLICATION = 'MisuiIndia.wsgi.application'
 
 
 DATABASES = {
-        'default': {
-            'ENGINE': 'djongo',
-            'NAME': 'codefree',
-            'ENFORCE_SCHEMA': False,
-            'CLIENT': {
-                'host': 'mongodb+srv://sourav:sourav@cluster0.cdasj.mongodb.net/codefree?retryWrites=true&w=majority'
-            }  
-        }
+    'default':{
+       'ENGINE':'django.db.backends.postgresql_psycopg2',
+       'NAME':'demo_1',
+       'USER':'postgres',
+       'PASSWORD':'Souravjha',
+       'HOST':'database-1.cxi1e7eiia35.us-east-2.rds.amazonaws.com',
+       'POST':'5432',
+      'ATOMATIC_REQUESTS':True,
+    }
 }
+
+############################### MONGO DB #############################
+
+# DATABASES = {
+#         'default': {
+#             'ENGINE': 'djongo',
+#             'NAME': 'codefree',
+#             'ENFORCE_SCHEMA': False,
+#             'CLIENT': {
+#                 'host': 'mongodb+srv://sourav:sourav@cluster0.cdasj.mongodb.net/codefree?retryWrites=true&w=majority'
+#             }  
+#         }
+# }
+
+############################### MONGO DB end #############################
+
+
+
+
+
+
+
 # mongodb+srv://sourav:<password>@cluster0.cdasj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 # DATABASES = {
 #         'default': {

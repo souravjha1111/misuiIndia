@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework_simplejwt import views as jwt_views
-from .views import ObtainTokenPair, RegisterView,  SellerRegister,home,SellerRegisterform, Sellerlogin, sellerlogout
+from .views import ObtainTokenPair, RegisterView,  storeRegister,home,storeRegisterform, storelogin, storelogout
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -11,14 +11,12 @@ urlpatterns = [
     # path('login/', loginView.as_view(), name='login'), 
     path('register/', RegisterView.as_view(), name='register'),
     path('home/', home, name = 'home'),
-    path('SellerRegister/', SellerRegister.as_view(), name='SellerRegister'),
-    path('SellerRegisterform/', SellerRegisterform, name='SellerRegisterform'),
-    path('Sellerlogin/', Sellerlogin.as_view(), name='Sellerlogin'),
-    path('sellerlogout/', sellerlogout, name = 'sellerlogout'),
+    path('storeRegister/', storeRegister.as_view(), name='storeRegister'),
+    path('storeRegisterform/', storeRegisterform, name='storeRegisterform'),
+    path('storelogin/', storelogin.as_view(), name='storelogin'),
+    path('storelogout/', storelogout, name = 'storelogout'),
     path('order/',include('orders.urls')),
     path('product/',include('products_api.urls')),
-
-    
 ]
 
 if settings.DEBUG:

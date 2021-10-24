@@ -1,10 +1,10 @@
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import permissions
-from .serializers import MyTokenObtainPairSerializer, UserSerializer, SellerSerializer
+from .serializers import MyTokenObtainPairSerializer, UserSerializer, storeSerializer
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import SellerRegisterForm, sellerloginform
+from .forms import storeRegisterForm, storeloginform
 from rest_framework.response import Response
 from django.shortcuts import redirect
 from rest_framework.views import APIView
@@ -32,17 +32,16 @@ class ObtainTokenPair(TokenObtainPairView):
 
 
 
-class SellerRegister(APIView):
+class storeRegister(APIView):
     permission_classes = (permissions.AllowAny,)
     def post(self, request):
-        seller = SellerSerializer(data=request.data)
-        print(request.data.get('isSeller'))
-        seller.is_valid(raise_exception=True)
-        seller.save()
+        store = storeSerializer(data=request.data)
+        store.is_valid(raise_exception=True)
+        store.save()
         return redirect(home) #redirect to login 
     
     def get(self, request):
-        return render(request, 'authentication/sellerregister.html')
+        return render(request, 'authentication/storeregister.html')
 
 
 
@@ -51,15 +50,15 @@ def home(request):
     return render(request, 'products_api/home.html')
 
 
-def SellerRegisterform(request):
+def storeRegisterform(request):
     if request.method == "POST":
-        form = SellerRegisterForm(request.POST, request.FILES)
+        form = storeRegisterForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('Sellerlogin')
+            return redirect('storelogin')
     else:
-        form = SellerRegisterForm()
-    return render(request, 'authentication/sellerlogin.html', {'form': form})
+        form = storeRegisterForm()
+    return render(request, 'authentication/storelogin.html', {'form': form})
 
 
 def get_tokens_for_user(user):
@@ -69,9 +68,9 @@ def get_tokens_for_user(user):
         'access': str(refresh.access_token),
     }
 
-class Sellerlogin(View):
+class storelogin(View):
     def post(self, request, format=None):
-        form = sellerloginform(request.POST)
+        form = storeloginform(request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
@@ -79,7 +78,7 @@ class Sellerlogin(View):
         print(user)
         if user is not None:
             if user.is_active:
-                html = redirect('registersellerproductsform')
+                html = redirect('registerstoreproductsform')
                 data = get_tokens_for_user(user)
                 html.set_cookie("access", data["access"])
                 html.set_cookie( "refresh", data["refresh"])
@@ -91,13 +90,13 @@ class Sellerlogin(View):
             return HttpResponse("Incorrect creditentails")
 
     def get(self, request):
-        form = sellerloginform()
-        return render(request, 'authentication/sellerlogin.html', {'form': form})
+        form = storeloginform()
+        return render(request, 'authentication/storelogin.html', {'form': form})
 
 
-########################################## SELLER LOGOUT BY DELETING COOKIES ######################
-def sellerlogout(request):
-    response = redirect('Sellerlogin')
+########################################## store LOGOUT BY DELETING COOKIES ######################
+def storelogout(request):
+    response = redirect('storelogin')
     print("#########################################################################")
     response.delete_cookie('access')
     response.delete_cookie('refresh')
@@ -114,16 +113,16 @@ def sellerlogout(request):
 
 
 
-# def SellerRegister(request):
+# def storeRegister(request):
 #     if request.method == 'POST':
-#         form = SellerRegisterForm(request.POST)
+#         form = storeRegisterForm(request.POST)
 #         if form.is_valid():
 #             form.save()
 #             username = form.cleaned_data.get('username')
 #             messages.success(request, f'Your account has been created! You are now able to log in')
 #             return HttpResponse("Your account has been created please login there")
 #     else:
-#         form = SellerRegisterForm()
+#         form = storeRegisterForm()
 #     return render(request, 'authentication/register.html', {'form': form})
 
 
@@ -136,9 +135,9 @@ def sellerlogout(request):
 
 
 
-# def sellerlogin(request):
+# def storelogin(request):
 #     if request.method == "POST":
-#         form = sellerloginform(request.POST)
+#         form = storeloginform(request.POST)
 #         if form.is_valid():
 #             username = form.cleaned_data.get('username')
 #             password = form.cleaned_data.get('password')
@@ -147,9 +146,9 @@ def sellerlogout(request):
 #             }
 #             token = 
 
-# class Sellerlogin(View):
+# class storelogin(View):
 #     def post(self, request):
-#         form = sellerloginform(request.POST)
+#         form = storeloginform(request.POST)
 #         if form.is_valid():
 #             username = form.cleaned_data.get('username')
 #             password = form.cleaned_data.get('password')
@@ -183,7 +182,7 @@ def sellerlogout(request):
 #         return JsonResponse(response.data)
 
 #     def get(self, request):
-#         form = sellerloginform()
-#         return render(request, 'authentication/sellerlogin.html', {'form': form})
+#         form = storeloginform()
+#         return render(request, 'authentication/storelogin.html', {'form': form})
 
 
