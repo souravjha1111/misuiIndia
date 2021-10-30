@@ -1,4 +1,3 @@
-
 import os
 import datetime
 from pathlib import Path
@@ -84,15 +83,14 @@ WSGI_APPLICATION = 'MisuiIndia.wsgi.application'
 DATABASES = {
     'default':{
        'ENGINE':'django.db.backends.postgresql_psycopg2',
-       'NAME':'demo_1',
-       'USER':'postgres',
-       'PASSWORD':'Souravjha',
-       'HOST':'database-1.cxi1e7eiia35.us-east-2.rds.amazonaws.com',
+       'NAME':'misuidatabase',
+       'USER':'sharan',
+       'PASSWORD':'Sinchan8527',
+       'HOST':'database-2.cxi1e7eiia35.us-east-2.rds.amazonaws.com',
        'POST':'5432',
       'ATOMATIC_REQUESTS':True,
     }
 }
-
 ############################### MONGO DB #############################
 
 # DATABASES = {
@@ -234,13 +232,13 @@ SIMPLE_JWT = {
 
 
 
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
-# STATIC_URL = '/static/'
-# MEDIA_URL = '/media/'
-# CORS_ORIGIN_ALLOW_ALL = True
-# CORS_ALLOW_CREDENTIALS = True
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+
 
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'static')
 
@@ -250,10 +248,13 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
 
-STATIC_ROOT  =    os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT  =    os.path.join(BASE_DIR, 'static')
 
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
+
+import mimetypes
+mimetypes.add_type("text/css", ".css", True)

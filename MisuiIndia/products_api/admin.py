@@ -5,6 +5,7 @@ from .models import ProductModel, SellerProductModel
 class ProductModelAdmin(admin.ModelAdmin):
     model = ProductModel
 
+
 class SellerProductModelAdmin(admin.ModelAdmin):
     model = SellerProductModel
 

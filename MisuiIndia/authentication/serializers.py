@@ -30,7 +30,7 @@ class UserSerializer(serializers.ModelSerializer):
 class storeSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ['id', 'username', 'email', 'password','contact_number', 'isstore', 'adharCardNumber','PanNumber']
+        fields = ['id', 'username', 'email', 'password','contact_number', 'isSeller', 'adharCardNumber','PanNumber']
         extra_kwargs = {
             'password': {'write_only': True}
         }
